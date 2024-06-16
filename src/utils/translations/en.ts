@@ -1,4 +1,5 @@
 export const enTranslations: any = {
+    "companyName": "SS",
     "products": "Products",
     "sortBy": "Sort By",
     "filter": "Filter",

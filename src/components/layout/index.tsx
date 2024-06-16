@@ -8,6 +8,7 @@ import { Menu as MenuIcon, ViewInArOutlined as ViewInArOutlinedIcon } from '@mui
 import { CompanyLogo } from '../elements/avatar';
 import { ProductSearch } from '../productList/search';
 import { MiniCart } from '../cart/miniCart';
+import { getTranslation } from '@/utils/translations';
 
 type PageType = {
     key: Key;
@@ -62,7 +63,7 @@ const AppLayout = (props: { children: ReactNode}) => {
             <Toolbar>
                 <Grid container alignItems="center" sx={{ m: "16px auto" }}>
                     <Grid item xs={12} container justifyContent="center" alignItems="center">
-                        <CompanyLogo />
+                        <CompanyLogo label={getTranslation('companyName')} />
                     </Grid>
                 </Grid>
             </Toolbar>

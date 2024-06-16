@@ -6,7 +6,7 @@ import { CenteredImage } from '../elements/centeredImage';
 import { Product } from '@/types/product';
 import { getTranslation } from '@/utils/translations';
 
-const CustomCard = ({ id, title, price, image, rating: { rate, count }, cartClickHandler }: Product & { cartClickHandler: MouseEventHandler }) => {
+export const CustomCard = ({ id, title, price, image, rating: { rate, count }, cartClickHandler }: Product & { cartClickHandler: MouseEventHandler }) => {
 
     return (
         <Card sx={{ p: 1, height: 570, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -42,24 +42,3 @@ const CustomCard = ({ id, title, price, image, rating: { rate, count }, cartClic
     );
 }
 
-
-const ProductCardHOC = (WrappedComponent: any) => {
-    const HOC = (props: Product & { cartClickHandler: MouseEventHandler }) => {
-      return (
-        <>
-            {
-                props.rating.rate > 4 ? 
-                    <div style={{border: '0.5px solid red' }}> 
-                        <WrappedComponent {...props} />
-                    </div>
-                : <WrappedComponent {...props} />
-            }
-        </>
-        );
-    }
-    HOC.displayName = 'higherOrderComponent';
-    return HOC;
-  }
-  
-
-export const ProductCard = ProductCardHOC(CustomCard);

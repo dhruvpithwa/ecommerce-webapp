@@ -1,12 +1,13 @@
 
-import { MouseEvent, Children, useState } from "react";
+import { MouseEvent, Children, useState, useEffect, useRef } from "react";
 
 import { Alert, Box, Grid, Snackbar, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { ProductCard } from "./card";
+import { ProductCard } from "./cardHOC";
 import { Product } from "@/types/product";
 import { addItemsToCart } from "@/store/cart/actions";
 import { getTranslation } from "@/utils/translations";
+import { useIntersectionObserver } from "@/utils/hooks/useIntersectionObserver";
 
 type ProductListType = {
     filters: { [key: string]: any }
@@ -16,6 +17,29 @@ export const ProductList = ({ filters }: ProductListType) => {
 
     const dispatch = useAppDispatch();
     const { products } = useAppSelector(state => state.productState);
+
+    const { observe, unobserve } = useIntersectionObserver({
+        callback: (id: string) => {
+            console.log(`Prodct ${id} is in viewport and focussed by customer`);
+        },
+        options: {
+            threshold: 0.8
+        },
+    });
+
+    const componentRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        componentRefs.current.forEach((ref) => {
+            if (ref) observe(ref);
+        });
+
+        return () => {
+            componentRefs.current.forEach((ref) => {
+                if (ref) unobserve(ref);
+            });
+        };
+    }, [observe, unobserve]);
 
     const [open, handleClose] = useState(false);
 
@@ -54,17 +78,24 @@ export const ProductList = ({ filters }: ProductListType) => {
 
             <Grid container mt={2}>
                 {
-                    products.length > 0 ? Children.toArray(products.map((productObj: Product) =>
+                    products.length > 0 ? Children.toArray(products.map((productObj: Product, index: number) =>
                         <Grid item xs={12} md={2.75} p={1}>
-                            <ProductCard {...productObj} cartClickHandler={cartClickHandler} />
+                            <div
+                                key={productObj.title}
+                                id={productObj.title}
+                                ref={(el: any) => (componentRefs.current[index] = el)}
+                            >
+                                <ProductCard {...productObj} cartClickHandler={cartClickHandler} />
+                            </div>
+                           
                         </Grid>
                     )) :
 
-                    <Grid item xs={12} p={1}>
-                        <Typography component={"div"} sx={{height: '100vh', textAlign: "center"}}>
-                            {getTranslation('ZeroProducts')}
-                        </Typography>
-                    </Grid>    
+                        <Grid item xs={12} p={1}>
+                            <Typography component={"div"} sx={{ height: '100vh', textAlign: "center" }}>
+                                {getTranslation('ZeroProducts')}
+                            </Typography>
+                        </Grid>
                 }
             </Grid>
         </Box>
