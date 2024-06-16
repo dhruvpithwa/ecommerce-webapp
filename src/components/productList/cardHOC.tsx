@@ -1,5 +1,6 @@
 
 import { MouseEventHandler } from 'react';
+
 import { Product } from '@/types/product';
 import { CustomCard } from './card';
 

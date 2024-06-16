@@ -1,5 +1,4 @@
 
-
 import { useEffect, useState } from "react";
 
 import { ProductFilters } from "@/components/productList/filters";

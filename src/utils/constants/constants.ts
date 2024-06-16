@@ -1,7 +1,7 @@
-export const productSortBy = {
-    NORMAL: "normal",
-    HIGHTOLOW: "highToLow",
-    LOWTOHIGH: "lowToHigh"
+export enum productSortBy {
+    NORMAL = "normal",
+    HIGHTOLOW = "highToLow",
+    LOWTOHIGH = "lowToHigh"
 }
 
 export const productSortByAttributes = [{

@@ -2,7 +2,8 @@
 import { ChangeEvent } from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CustomAutocomplete } from './autocomplete';
+
+import { CustomAutocomplete } from '../autocomplete';
 
 describe('CustomAutocomplete component', () => {
     const mockOnChangeHandler = jest.fn((event: ChangeEvent<HTMLInputElement>) => {

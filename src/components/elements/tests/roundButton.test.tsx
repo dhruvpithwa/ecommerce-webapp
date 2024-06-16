@@ -1,7 +1,7 @@
 // RoundButton.test.tsx
 import '@testing-library/jest-dom';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { RoundButton } from './roundButton';
+import { RoundButton } from '../roundButton';
 
 describe('RoundButton component', () => {
     const mockOnClickHandler = jest.fn();
