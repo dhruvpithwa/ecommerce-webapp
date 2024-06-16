@@ -44,14 +44,22 @@ const CustomCard = ({ id, title, price, image, rating: { rate, count }, cartClic
 
 
 const ProductCardHOC = (WrappedComponent: any) => {
-    return (props: Product & { cartClickHandler: MouseEventHandler }) => {
-        return props.rating.rate > 4 ? 
-            <div style={{border: '0.5px solid red' }}> 
-                <WrappedComponent {...props} />
-            </div>
-        : <WrappedComponent {...props} />;
-    };
-};
-
+    const HOC = (props: Product & { cartClickHandler: MouseEventHandler }) => {
+      return (
+        <>
+            {
+                props.rating.rate > 4 ? 
+                    <div style={{border: '0.5px solid red' }}> 
+                        <WrappedComponent {...props} />
+                    </div>
+                : <WrappedComponent {...props} />
+            }
+        </>
+        );
+    }
+    HOC.displayName = 'higherOrderComponent';
+    return HOC;
+  }
+  
 
 export const ProductCard = ProductCardHOC(CustomCard);
