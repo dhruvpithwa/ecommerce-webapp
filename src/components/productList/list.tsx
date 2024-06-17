@@ -25,6 +25,7 @@ export const ProductList = ({ filters }: ProductListType) => {
         options: {
             threshold: 0.8
         },
+        delay: 3000
     });
 
     const componentRefs = useRef<(HTMLDivElement | null)[]>([]);
