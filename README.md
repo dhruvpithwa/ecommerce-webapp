@@ -71,6 +71,7 @@ By combining SSR for the initial page load and CSR for dynamic interactions, alo
 
 #### Intersection Browser
 - Developed a feature to track user's interest on a particular products if focussed for more than x seconds using Intersection Browser API.
+- This data can be tracked at Google Analytics and thus can be used further for user segmentation
 - ![image](https://github.com/dhruvpithwa/ecommerce-webapp/assets/49706789/06bafc6b-9f60-4341-8c55-495cf0059678)
 - ![image](https://github.com/dhruvpithwa/ecommerce-webapp/assets/49706789/f18c15c9-119f-4af1-a62d-36f0770e0747)
 
